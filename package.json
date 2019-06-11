@@ -13,13 +13,14 @@
     "w3": "^2.0.0"
   },
   "scripts": {
-    "build": "run-s clean build:one build:two",
-    "clean": "rm -rf dist",
-    "build:one": "rollup -c",
-    "build:two": "node build.js",
+    "build": "run-s init build:js build:html",
+    "init": "rm -rf dist",
+    "build:js": "rollup -c",
+    "build:html": "node build.js",
     "start": "npx w3 dist"
   },
   "dependencies": {
-    "klaw-sync": "^6.0.0"
+    "klaw-sync": "^6.0.0",
+    "ramda": "^0.26.1"
   }
 }
