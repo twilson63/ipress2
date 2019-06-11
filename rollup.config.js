@@ -9,7 +9,7 @@ import multiInput from 'rollup-plugin-multi-input'
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
-  input: ['src/**/*.md'],
+  input: ['src/**/*.md', 'src/**/*.html'],
 	output: {
 		format: 'cjs',
     dir: 'dist'
@@ -23,7 +23,7 @@ export default {
 			css: css => {
 				css.write('public/bundle.css');
       },
-      extensions: ['.svelte', '.md'],
+      extensions: ['.svelte', '.md', '.html'],
       preprocess: mdsvex({
         extension: '.md'
       }),
