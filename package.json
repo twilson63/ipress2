@@ -2,6 +2,7 @@
   "name": "svelte-app",
   "version": "1.0.1",
   "devDependencies": {
+    "chokidar-cli": "^1.2.2",
     "mdsvex": "^0.3.0",
     "npm-run-all": "^4.1.5",
     "rollup": "^1.10.1",
@@ -17,7 +18,9 @@
     "init": "rm -rf dist",
     "build:js": "rollup -c",
     "build:html": "node build.js",
-    "start": "npx w3 dist"
+    "start": "npx w3 dist",
+    "watch": "chokidar \"src/**/*.*\" -c \"npm run build --silent --scripts-prepend-node-path\"",
+    "dev": "run-p watch start"
   },
   "dependencies": {
     "klaw-sync": "^6.0.0",

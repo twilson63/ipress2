@@ -1,5 +1,6 @@
 ---
 title: ipress2
+version: 1.1
 layout: ./layout.svelte
 ---
 
@@ -24,6 +25,18 @@ Create your Markdown files in the `src` folder.
 npm run build
 npm start
 ```
+
+## Dev Mode
+
+Dev mode will run a localserver on port 3000 and a watch script to rebuild when a file 
+changes in the `src` directory.
+
+```sh
+
+npm run dev
+```
+
+
 
 ## How to use
 
