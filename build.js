@@ -1,6 +1,7 @@
 var klaw = require('klaw-sync')
 var fs = require('fs')
-var { compose, map } = require('ramda')
+var { compose, map, replace, head, tail, toUpper, toLower } = require('ramda')
+var path = require('path')
 
 /**
  * apply filter ignore chunk files
@@ -49,7 +50,7 @@ map(build, results)
  * @returns {string}
  *
  */
-function htmlTemplate ({html, head, css}) {
+function htmlTemplate ({html, head, css}, component) {
   return `
 <!doctype html>
 <html>
@@ -58,7 +59,15 @@ function htmlTemplate ({html, head, css}) {
     ${css.code !== '' ? `<style>${css.code}</style>` : ''}
   </head>
   <body>
+    <div id="app">
     ${html}
+    </div>
+    <script type="module">
+      import Index from './${toLower(component)}.js'
+      const target = document.getElementById('app')
+      target.innerHTML = ''
+      new ${component}({ target })
+    </script>
   </body>
 </html>
 `
@@ -97,7 +106,17 @@ function createOutputBundle({ path }) {
  * @returns {null}
  */
 function writeHtmlFile({js, file, content}) {
-  fs.writeFileSync(file, htmlTemplate(content))
+  // need to get the file name eg. index.js
+  // need to create the component name Index 
+  const jsComponent = buildJsComponentName(js)
+  fs.writeFileSync(file, htmlTemplate(content, jsComponent))
   fs.unlinkSync(js)
 }
 
+function buildJsComponentName(file) {
+  let jsComponent = replace(path.resolve('./dist') + '/', '', file)
+  jsComponent = replace('.js', '', jsComponent)
+  jsComponent = toUpper(head(jsComponent)) + tail(jsComponent)
+  return jsComponent
+ 
+}

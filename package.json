@@ -14,10 +14,11 @@
     "w3": "^2.0.0"
   },
   "scripts": {
-    "build": "run-s init build:js build:html",
+    "build": "run-s init build:js build:html move:js",
     "init": "rm -rf dist",
     "build:js": "rollup -c",
     "build:html": "node build.js",
+    "move:js": "mv scripts/*.js dist/",
     "start": "npx w3 dist",
     "watch": "chokidar \"src/**/*.*\" -c \"npm run build --silent --scripts-prepend-node-path\"",
     "dev": "run-p watch start"

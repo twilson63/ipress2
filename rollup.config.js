@@ -8,7 +8,7 @@ import multiInput from 'rollup-plugin-multi-input'
 
 const production = !process.env.ROLLUP_WATCH;
 
-export default {
+export default [{
   input: ['src/**/*.md', 'src/**/*.html'],
 	output: {
 		format: 'cjs',
@@ -51,4 +51,32 @@ export default {
 	watch: {
 		clearScreen: false
 	}
-};
+}, {
+  input: ['src/**/*.md', 'src/**/*.html'],
+	output: {
+		format: 'esm',
+    dir: 'scripts'
+	},
+	plugins: [
+		svelte({
+			// enable run-time checks when not in production
+			dev: !production,
+			// we'll extract any component CSS out into
+			// a separate file — better for performance
+			css: css => {
+				css.write('public/bundle.css');
+      },
+      extensions: ['.svelte', '.md', '.html'],
+      preprocess: mdsvex({
+        extension: '.md'
+      })
+		}),
+		resolve({ browser: true }),
+		commonjs(),
+
+    multiInput()
+	],
+	watch: {
+		clearScreen: false
+	}
+}] ;

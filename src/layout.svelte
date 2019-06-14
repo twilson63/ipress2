@@ -4,6 +4,7 @@
 <section class="section">
 <div class="container">
   <div class="content">
+    <button class="button" on:click={()  => alert('Hello World')}>Hello World</button>
     <slot />
   </div>
 </div>
