@@ -63,10 +63,10 @@ function htmlTemplate ({html, head, css}, component) {
     ${html}
     </div>
     <script type="module">
-      import Index from './${toLower(component)}.js'
+      import App from '/${toLower(component)}.js'
       const target = document.getElementById('app')
       target.innerHTML = ''
-      new ${component}({ target })
+      new App({ target })
     </script>
   </body>
 </html>
@@ -113,10 +113,17 @@ function writeHtmlFile({js, file, content}) {
   fs.unlinkSync(js)
 }
 
+/**
+ * get component name from file
+ *
+ * @param {string} file
+ *
+ * @returns {string}
+ *
+ */
 function buildJsComponentName(file) {
   let jsComponent = replace(path.resolve('./dist') + '/', '', file)
   jsComponent = replace('.js', '', jsComponent)
   jsComponent = toUpper(head(jsComponent)) + tail(jsComponent)
   return jsComponent
- 
 }

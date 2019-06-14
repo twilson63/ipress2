@@ -14,6 +14,7 @@ export default [{
 		format: 'cjs',
     dir: 'dist'
 	},
+  chunkGroupingSize: 10000,
 	plugins: [
 		svelte({
 			// enable run-time checks when not in production

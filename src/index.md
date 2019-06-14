@@ -4,6 +4,8 @@ version: 1.1
 layout: ./layout.svelte
 ---
 
+[foo](foo)
+
 # {_fm.title}
 
 ipress2 is a static website generator using MDsveX technology.
