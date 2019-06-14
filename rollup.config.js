@@ -2,7 +2,7 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 //import livereload from 'rollup-plugin-livereload';
-//import { terser } from 'rollup-plugin-terser';
+import { terser } from 'rollup-plugin-terser';
 import { mdsvex } from 'mdsvex'
 import multiInput from 'rollup-plugin-multi-input'
 
@@ -73,7 +73,7 @@ export default [{
 		}),
 		resolve({ browser: true }),
 		commonjs(),
-
+    terser(),
     multiInput()
 	],
 	watch: {
