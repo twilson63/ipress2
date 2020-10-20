@@ -5,7 +5,7 @@ var { compose, map } = require('ramda')
 /**
  * apply filter ignore chunk files
  */
-const filter = file => /chunk/.test(file.path) === false
+const filter = file => /cc.js$/.test(file.path) === false
 
 /*
  * get files
@@ -84,7 +84,7 @@ function htmlTemplate ({html, head, css}) {
  * @returns {OutputBundle}
  */
 function createOutputBundle({ path }) {
-  const content = require(path).render()
+  const content = require(path).default.render()
   const file = path.replace('.js', '.html')
   return {js: path, file, content}
 }
